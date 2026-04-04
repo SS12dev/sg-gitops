@@ -15,7 +15,7 @@ spec:
       containers:
         - name: smartgenie-sample
           image: smartgenie-sample:local
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           readinessProbe:
