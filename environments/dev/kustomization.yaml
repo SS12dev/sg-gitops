@@ -5,7 +5,8 @@ resources:
   - namespace.yaml
   - ../../base/sample-service
 labels:
-  - pairs:
+  - includeSelectors: false
+    pairs:
       app.kubernetes.io/environment: dev
 images:
   - name: smartgenie-sample
