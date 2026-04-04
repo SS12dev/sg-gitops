@@ -10,7 +10,10 @@ sg-gitops/
 ├── base/
 │   └── sample-service/
 └── environments/
-    └── dev/
+    ├── dev/
+    ├── qa/
+    ├── preprod/
+    └── prod/
 ```
 
 ## Purpose

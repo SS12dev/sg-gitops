@@ -12,3 +12,54 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: smartgenie-qa
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: smartgenie-dev
+  interval: 1m0s
+  path: ./environments/qa
+  prune: true
+  wait: true
+  timeout: 3m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: smartgenie-preprod
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: smartgenie-qa
+  interval: 1m0s
+  path: ./environments/preprod
+  prune: true
+  wait: true
+  timeout: 3m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: smartgenie-prod
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: smartgenie-preprod
+  interval: 1m0s
+  path: ./environments/prod
+  prune: true
+  wait: true
+  timeout: 3m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
