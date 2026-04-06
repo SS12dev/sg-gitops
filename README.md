@@ -1,14 +1,14 @@
-# `sg-gitops` Local POC Skeleton
+# `sg-gitops`
 
-This folder is the starting point for the SmartGenie GitOps repository structure used in the local Minikube experiment.
+GitOps repository for the SmartGenie local and multi-environment Flux experiments.
 
-## Intended structure
+## Structure
 ```text
 sg-gitops/
 ├── clusters/
 │   └── minikube/
-├── base/
-│   └── sample-service/
+├── apps/
+│   └── base/
 └── environments/
     ├── dev/
     ├── qa/
@@ -17,9 +17,13 @@ sg-gitops/
 ```
 
 ## Purpose
-- `clusters/` -> cluster-level Flux entrypoints
-- `base/` -> reusable application manifests
-- `environments/` -> environment-specific overlays
+- `clusters/` -> cluster-level Flux entrypoints and Git sources
+- `apps/base/` -> shared `HelmRelease` definitions for SmartGenie services
+- `environments/` -> environment-specific overlays and namespace scoping
 
-## Next action
-Use this structure with a test GitHub repo, then bootstrap Flux to it and let Flux reconcile the manifests into Minikube.
+## Current model
+- Flux syncs this repo
+- the app deployments are defined as `HelmRelease` resources
+- the charts come from the separate repo `sg-helm-charts`
+- each environment overlays the same services with env-specific values
+

@@ -1,0 +1,30 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: agent-assistant
+spec:
+  values:
+    nameOverride: agent-assistant
+    fullnameOverride: smartgenie-agent-assistant
+    replicaCount: 1
+    image:
+      repository: ghcr.io/ss12dev/smartgenie-agent-assistant
+      tag: qa-latest
+      pullPolicy: IfNotPresent
+    service:
+      port: 80
+      targetPort: 8080
+    containerPort: 8080
+    env:
+      APP_ENV: dev
+      LOG_LEVEL: DEBUG
+      APP_ROLE: assistant
+      SERVICE_NAME: agent-assistant
+      HEALTH_PATH: /health
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi

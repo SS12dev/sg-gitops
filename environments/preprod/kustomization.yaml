@@ -3,12 +3,11 @@ kind: Kustomization
 namespace: smartgenie-preprod
 resources:
   - namespace.yaml
-  - ../../base/sample-service
+  - ../../apps/base
 labels:
   - includeSelectors: false
     pairs:
       app.kubernetes.io/environment: preprod
-images:
-  - name: smartgenie-sample
-    newName: ghcr.io/ss12dev/smartgenie-sample
-    newTag: 4429eaa7ac061aa66f7e403f0dd6fca1c8e93b4c
+patches:
+  - path: agent-assistant-patch.yaml
+  - path: agent-analytics-patch.yaml
